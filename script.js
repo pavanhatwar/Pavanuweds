@@ -5,29 +5,39 @@ document.addEventListener("DOMContentLoaded", () => {
     const musicToggle = document.getElementById("music-toggle");
 
     // Open Envelope Action
-    envelopeScreen.addEventListener("click", () => {
-        envelopeScreen.style.opacity = "0";
-        setTimeout(() => {
-            envelopeScreen.classList.add("hidden");
-            mainContent.classList.remove("hidden");
-            bgMusic.play().catch(e => console.log("Audio autoplay restricted"));
-        }, 800);
-    });
+    if (envelopeScreen) {
+        envelopeScreen.addEventListener("click", () => {
+            envelopeScreen.style.opacity = "0";
+            setTimeout(() => {
+                envelopeScreen.style.display = "none";
+                if (mainContent) {
+                    mainContent.classList.remove("hidden");
+                }
+            }, 500);
+
+            // Play background music
+            if (bgMusic) {
+                bgMusic.play().catch(e => console.log("Audio autoplay restricted"));
+            }
+        });
+    }
 
     // Toggle Background Music
     let isPlaying = true;
-    musicToggle.addEventListener("click", () => {
-        if (isPlaying) {
-            bgMusic.pause();
-            musicToggle.textContent = "🔇";
-        } else {
-            bgMusic.play();
-            musicToggle.textContent = "🔊";
-        }
-        isPlaying = !isPlaying;
-    });
+    if (musicToggle && bgMusic) {
+        musicToggle.addEventListener("click", () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicToggle.textContent = "🔇";
+            } else {
+                bgMusic.play();
+                musicToggle.textContent = "🔊";
+            }
+            isPlaying = !isPlaying;
+        });
+    }
 
-    // Fixed Scratch Card Interaction
+    // Scratch Card Interaction
     const scratchCovers = document.querySelectorAll(".scratch-cover");
     scratchCovers.forEach(cover => {
         cover.addEventListener("click", () => {
@@ -49,19 +59,4 @@ document.addEventListener("DOMContentLoaded", () => {
         const second = 1000;
         const minute = second * 60;
         const hour = minute * 60;
-        const day = hour * 24;
-
-        const days = Math.floor(gap / day);
-        const hours = Math.floor((gap % day) / hour);
-        const mins = Math.floor((gap % hour) / minute);
-        const secs = Math.floor((gap % minute) / second);
-
-        document.getElementById("days").innerText = String(days).padStart(2, '0');
-        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-        document.getElementById("mins").innerText = String(mins).padStart(2, '0');
-        document.getElementById("secs").innerText = String(secs).padStart(2, '0');
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-});
+        const day = hour * 2
