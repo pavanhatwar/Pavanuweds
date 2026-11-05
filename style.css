@@ -23,7 +23,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Envelope Opening Screen */
+/* Envelope Opening Screen - Centered */
 .envelope-screen {
     position: fixed;
     top: 0;
@@ -52,12 +52,14 @@ body {
     align-items: center;
     justify-content: center;
     border: 2px solid rgba(212, 175, 55, 0.4);
+    text-align: center;
+    margin: auto;
 }
 
 .envelope-card h2 {
     color: #fff;
     font-family: 'Playfair Display', serif;
-    margin-top: 40px;
+    margin-top: 20px;
     letter-spacing: 1px;
 }
 
@@ -78,7 +80,7 @@ body {
     border: 2px dashed #8b263e;
 }
 
-/* Main Content Layout */
+/* Main Content Layout - Perfectly Centered */
 .main-content {
     width: 100%;
     max-width: 480px;
@@ -88,6 +90,7 @@ body {
     position: relative;
     padding: 20px;
     text-align: center;
+    margin: 0 auto;
     opacity: 1;
     transition: opacity 1s ease;
 }
@@ -99,6 +102,7 @@ body {
 section {
     padding: 40px 10px;
     border-bottom: 1px solid rgba(139, 38, 62, 0.1);
+    text-align: center;
 }
 
 /* Typography & Hero */
@@ -133,6 +137,7 @@ h1 {
     font-size: 0.85rem;
     color: #775a56;
     margin-top: 15px;
+    padding: 0 10px;
 }
 
 .scroll-prompt {
@@ -153,12 +158,13 @@ h1 {
     60% {transform: translateY(3px);}
 }
 
-/* Scratch Cards Section */
+/* Scratch Cards Section - Centered Alignment */
 .scratch-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 15px;
-    margin: 20px 0;
+    margin: 20px auto;
 }
 
 .scratch-box {
@@ -168,6 +174,7 @@ h1 {
     border-radius: 8px;
     width: 90px;
     box-shadow: 0 4px 10px rgba(139,38,62,0.2);
+    text-align: center;
 }
 
 .scratch-box span {
@@ -194,32 +201,26 @@ h1 {
     color: var(--primary-red);
 }
 
-/* Countdown Timer */
-.countdown-timer {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.countdown-timer div {
+/* Fixed Date Display Section */
+.fixed-wedding-date {
     background: #fff;
-    padding: 12px;
+    padding: 15px;
     border-radius: 8px;
-    min-width: 65px;
-    border: 1px solid rgba(139,38,62,0.15);
-}
-
-.countdown-timer span {
-    display: block;
-    font-size: 1.3rem;
-    font-weight: 600;
+    margin-top: 15px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
     color: var(--primary-red);
+    border: 1px solid rgba(139,38,62,0.15);
+    display: inline-block;
+    width: 100%;
+    max-width: 320px;
 }
 
-.countdown-timer small {
-    font-size: 0.6rem;
-    color: #775a56;
+.wedding-date-text {
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: var(--accent-gold);
+    font-weight: 600;
 }
 
 /* Polaroid & Venue Cards */
@@ -259,7 +260,7 @@ h1 {
     margin-bottom: 15px;
 }
 
-.map-btn, .submit-btn {
+.map-btn {
     display: block;
     width: 100%;
     background: var(--primary-red);
@@ -276,96 +277,17 @@ h1 {
     transition: background 0.3s;
 }
 
-.map-btn:hover, .submit-btn:hover {
+.map-btn:hover {
     background: #6e1d31;
 }
 
-/* RSVP Form */
-form {
-    text-align: left;
-    margin-top: 20px;
-}
-
-form label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 600;
+.dress-code {
+    background: #fcf6f0;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    margin-bottom: 12px;
     color: var(--primary-red);
-    margin: 15px 0 5px 0;
-}
-
-form input[type="text"],
-form input[type="tel"],
-form select,
-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #d4bda8;
-    border-radius: 6px;
-    background: #fff;
-    font-size: 0.9rem;
-}
-
-.phone-input {
-    display: flex;
-    gap: 8px;
-}
-
-.country-code {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 0 10px;
-    border: 1px solid #d4bda8;
-    border-radius: 6px;
-    font-size: 0.85rem;
-}
-
-.rsvp-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.rsvp-choice {
-    flex: 1;
-    padding: 10px;
-    background: #fff;
-    border: 1px solid var(--primary-red);
-    color: var(--primary-red);
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.rsvp-choice.active {
-    background: var(--primary-red);
-    color: #fff;
-}
-
-.checkbox-group {
-    background: #fff;
-    padding: 10px;
-    border: 1px solid #d4bda8;
-    border-radius: 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 0.85rem;
-}
-
-.checkbox-group label {
-    margin: 0;
-    color: var(--text-dark);
-    font-weight: normal;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 80px;
 }
 
 /* Music Control Button */
@@ -390,6 +312,7 @@ footer {
     font-size: 0.85rem;
     color: #6e4f4a;
     line-height: 1.6;
+    text-align: center;
 }
 
 .warm-regards {

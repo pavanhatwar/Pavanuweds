@@ -35,14 +35,4 @@ document.addEventListener("DOMContentLoaded", () => {
             cover.classList.add("revealed");
         });
     });
-
-    // RSVP Form Submission Handler
-    const rsvpForm = document.getElementById("rsvp-form");
-    const thankYouMsg = document.getElementById("thank-you-msg");
-
-    rsvpForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        rsvpForm.classList.add("hidden");
-        thankYouMsg.classList.remove("hidden");
-    });
 });
