@@ -1,0 +1,400 @@
+:root {
+    --bg-color: #fcf6f0;
+    --primary-red: #8B263E;
+    --accent-gold: #D4AF37;
+    --text-dark: #3a2e2b;
+    --card-bg: #fffbf7;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Envelope Opening Screen */
+.envelope-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #7a1c30, #52101d);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.envelope-card {
+    background: #8b263e;
+    width: 90%;
+    max-width: 400px;
+    height: 300px;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(212, 175, 55, 0.4);
+}
+
+.envelope-card h2 {
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    margin-top: 40px;
+    letter-spacing: 1px;
+}
+
+.wax-seal {
+    width: 70px;
+    height: 70px;
+    background: #f4ecdf;
+    color: #8b263e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    margin-top: 15px;
+    border: 2px dashed #8b263e;
+}
+
+/* Main Content Layout */
+.main-content {
+    width: 100%;
+    max-width: 480px;
+    background: var(--bg-color);
+    min-height: 100vh;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    position: relative;
+    padding: 20px;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+section {
+    padding: 40px 10px;
+    border-bottom: 1px solid rgba(139, 38, 62, 0.1);
+}
+
+/* Typography & Hero */
+.sanskrit-text {
+    font-size: 0.85rem;
+    color: #7a5c58;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: #5c4744;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--primary-red);
+}
+
+.ampersand {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--accent-gold);
+    font-style: italic;
+}
+
+.parents {
+    font-size: 0.85rem;
+    color: #775a56;
+    margin-top: 15px;
+}
+
+.scroll-prompt {
+    margin-top: 30px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--primary-red);
+}
+
+.arrow {
+    font-size: 1.2rem;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(6px);}
+    60% {transform: translateY(3px);}
+}
+
+/* Scratch Cards Section */
+.scratch-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.scratch-box {
+    background: var(--primary-red);
+    color: #fff;
+    padding: 15px 10px;
+    border-radius: 8px;
+    width: 90px;
+    box-shadow: 0 4px 10px rgba(139,38,62,0.2);
+}
+
+.scratch-box span {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    color: #f4ecdf;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.scratch-cover {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: #a83852;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.scratch-cover.revealed {
+    background: #f4ecdf;
+    color: var(--primary-red);
+}
+
+/* Countdown Timer */
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.countdown-timer div {
+    background: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    min-width: 65px;
+    border: 1px solid rgba(139,38,62,0.15);
+}
+
+.countdown-timer span {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--primary-red);
+}
+
+.countdown-timer small {
+    font-size: 0.6rem;
+    color: #775a56;
+}
+
+/* Polaroid & Venue Cards */
+.polaroid, .venue-card, .event-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    margin-top: 20px;
+    text-align: left;
+}
+
+.polaroid img, .venue-card img, .event-card img {
+    width: 100%;
+    border-radius: 6px;
+    height: auto;
+    object-fit: cover;
+}
+
+.polaroid p {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.venue-card h4, .event-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--primary-red);
+    margin: 12px 0 6px 0;
+}
+
+.venue-card p, .event-card p {
+    font-size: 0.85rem;
+    color: #5c4744;
+    margin-bottom: 15px;
+}
+
+.map-btn, .submit-btn {
+    display: block;
+    width: 100%;
+    background: var(--primary-red);
+    color: #fff;
+    text-align: center;
+    padding: 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.map-btn:hover, .submit-btn:hover {
+    background: #6e1d31;
+}
+
+/* RSVP Form */
+form {
+    text-align: left;
+    margin-top: 20px;
+}
+
+form label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-red);
+    margin: 15px 0 5px 0;
+}
+
+form input[type="text"],
+form input[type="tel"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d4bda8;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 0.9rem;
+}
+
+.phone-input {
+    display: flex;
+    gap: 8px;
+}
+
+.country-code {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 0 10px;
+    border: 1px solid #d4bda8;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.rsvp-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.rsvp-choice {
+    flex: 1;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid var(--primary-red);
+    color: var(--primary-red);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.rsvp-choice.active {
+    background: var(--primary-red);
+    color: #fff;
+}
+
+.checkbox-group {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #d4bda8;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.checkbox-group label {
+    margin: 0;
+    color: var(--text-dark);
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Music Control Button */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--primary-red);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 999;
+}
+
+footer {
+    padding: 40px 10px;
+    font-size: 0.85rem;
+    color: #6e4f4a;
+    line-height: 1.6;
+}
+
+.warm-regards {
+    margin-top: 20px;
+    letter-spacing: 2px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
