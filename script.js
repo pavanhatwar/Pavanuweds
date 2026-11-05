@@ -4,10 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = document.getElementById("bg-music");
     const musicToggle = document.getElementById("music-toggle");
 
-    // Open Envelope Action
-    if (envelopeScreen) {
-        envelopeScreen.addEventListener("click", () => {
-            envelopeScreen.style.opacity = "0";
+    function openEnvelope() {
+        if (envelopeScreen && !envelopeScreen.classList.contains("fade-out")) {
+            envelopeScreen.classList.add("fade-out");
             setTimeout(() => {
                 envelopeScreen.style.display = "none";
                 if (mainContent) {
@@ -19,6 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
             if (bgMusic) {
                 bgMusic.play().catch(e => console.log("Audio autoplay restricted"));
             }
+        }
+    }
+
+    // Support both clicks and touch events for reliable mobile/desktop response
+    if (envelopeScreen) {
+        envelopeScreen.addEventListener("click", openEnvelope);
+        envelopeScreen.addEventListener("touchend", (e) => {
+            e.preventDefault();
+            openEnvelope();
         });
     }
 
@@ -59,4 +67,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const second = 1000;
         const minute = second * 60;
         const hour = minute * 60;
-        const day = hour * 2
+        const day = hour * 24;
+
+        const days = Math.floor(gap / day);
+        const hours = Math.floor((gap % day) / hour);
+        const mins = Math.floor((gap % hour) / minute);
+        const secs = Math.floor((gap % minute) / second);
+
+        const daysEl = document.getElementById("days");
+        const hoursEl = document.getElementById("hours");
+        const minsEl = document.getElementById("mins");
+        const secsEl = document.getElementById("secs");
+
+        if (daysEl) daysEl.innerText = String(days).padStart(2, '0');
+        if (hoursEl) hoursEl.innerText = String(hours).padStart(2, '0');
+        if (minsEl) minsEl.innerText = String(mins).padStart(2, '0');
+        if (secsEl) secsEl.innerText = String(secs).padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+});
