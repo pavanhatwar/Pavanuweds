@@ -12,6 +12,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (mainContent) {
                     mainContent.classList.remove("hidden");
                 }
+
+                // 1. Automatically auto-scroll down to the Save the Date section after 500ms
+                setTimeout(() => {
+                    const dateSection = document.querySelector(".date-section");
+                    if (dateSection) {
+                        dateSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 500);
+
+                // 2. Automatically reveal the scratch cards after scrolling (e.g., after 1.5 seconds)
+                setTimeout(() => {
+                    const scratchCovers = document.querySelectorAll(".scratch-cover");
+                    scratchCovers.forEach(cover => {
+                        const revealedText = cover.getAttribute("data-revealed");
+                        cover.textContent = revealedText;
+                        cover.classList.add("revealed");
+                    });
+                }, 1500);
+
             }, 500);
 
             // Play background music
@@ -45,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Scratch Card Interaction
+    // Manual scratch card interaction (in case users click them directly later)
     const scratchCovers = document.querySelectorAll(".scratch-cover");
     scratchCovers.forEach(cover => {
         cover.addEventListener("click", () => {
