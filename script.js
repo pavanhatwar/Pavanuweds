@@ -4,6 +4,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = document.getElementById("bg-music");
     const musicToggle = document.getElementById("music-toggle");
 
+    // Helper function for timed smooth scrolling over a specific duration (in ms)
+    function slowScrollTo(targetY, duration, callback) {
+        const startY = window.pageYOffset;
+        const distance = targetY - startY;
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const progress = Math.min(timeElapsed / duration, 1);
+            
+            // Smooth easing function
+            const ease = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+            
+            window.scrollTo(0, startY + (distance * ease));
+
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            } else {
+                if (callback) callback();
+            }
+        }
+
+        requestAnimationFrame(animation);
+    }
+
     function openEnvelope() {
         if (envelopeScreen && !envelopeScreen.classList.contains("fade-out")) {
             envelopeScreen.classList.add("fade-out");
@@ -13,23 +39,38 @@ document.addEventListener("DOMContentLoaded", () => {
                     mainContent.classList.remove("hidden");
                 }
 
-                // 1. Automatically auto-scroll down to the Save the Date section after 500ms
+                // Step 1: 1.5 second pause after opening the envelope
                 setTimeout(() => {
                     const dateSection = document.querySelector(".date-section");
-                    if (dateSection) {
-                        dateSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }, 500);
+                    if (!dateSection) return;
 
-                // 2. Automatically reveal the scratch cards after scrolling (e.g., after 1.5 seconds)
-                setTimeout(() => {
-                    const scratchCovers = document.querySelectorAll(".scratch-cover");
-                    scratchCovers.forEach(cover => {
-                        const revealedText = cover.getAttribute("data-revealed");
-                        cover.textContent = revealedText;
-                        cover.classList.add("revealed");
+                    const dateSectionY = dateSection.getBoundingClientRect().top + window.pageYOffset - 50;
+
+                    // Step 2: Smooth and slow scroll till Save the Date (takes ~5 seconds)
+                    slowScrollTo(dateSectionY, 5000, () => {
+                        
+                        // Step 3: Add an extra pause (e.g., 2 seconds) after scrolling before scratching starts
+                        setTimeout(() => {
+                            const scratchCovers = document.querySelectorAll(".scratch-cover");
+                            scratchCovers.forEach((cover, index) => {
+                                setTimeout(() => {
+                                    const revealedText = cover.getAttribute("data-revealed");
+                                    cover.textContent = revealedText;
+                                    cover.classList.add("revealed");
+                                }, index * 1200); // 1.2 seconds stagger delay between each card
+                            });
+
+                            // Step 4: After scratch cards finish revealing, continue smooth slow scrolling till the bottom
+                            setTimeout(() => {
+                                const maxScrollY = document.documentElement.scrollHeight - window.innerHeight;
+                                slowScrollTo(maxScrollY, 35000); // Slow glide to the footer
+                            }, 5000); // Wait until all cards finish revealing before final scroll glide
+
+                        }, 2000); // <--- 2 second pause right after reaching the date section
+
                     });
-                }, 1500);
+
+                }, 1500); // 1.5 sec initial pause
 
             }, 500);
 
@@ -64,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Manual scratch card interaction (in case users click them directly later)
+    // Manual scratch card interaction
     const scratchCovers = document.querySelectorAll(".scratch-cover");
     scratchCovers.forEach(cover => {
         cover.addEventListener("click", () => {
